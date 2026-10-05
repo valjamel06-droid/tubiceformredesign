@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Member User ID Registration - Social Security System</title>
+    
+    <script>
+tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        sss: {
+                            navy: '#002B49',
+                            blue: '#005691',
+                            cyan: '#00A3E0',
+                            light: '#F4F7FA',
+                            accent: '#0072CE'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col justify-between">
+
+    
+    <header class="bg-sss-navy text-white shadow-md border-b-4 border-sss-cyan sticky top-0 z-30">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center font-bold text-sss-navy text-xl shadow">
+                    <i class="fa-solid font-bold text-sss-blue">SSS</i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight tracking-wide">Republic of the Philippines</h1>
+                    <p class="text-xs text-sss-cyan font-medium">SOCIAL SECURITY SYSTEM</p>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center space-x-2 text-xs bg-slate-800/60 px-3 py-1.5 rounded-full border border-slate-700">
+                <i class="fa-solid fa-lock text-emerald-400"></i>
+                <span>Official Online Member Portal</span>
+            </div>
+        </div>
+    </header>
+
+    
+    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow">
+        
+        
+        <div class="bg-white rounded-2xl custom-shadow overflow-hidden border border-slate-100">
+            
+            <div class="bg-gradient-to-r from-sss-navy via-sss-blue to-sss-navy p-6 text-white relative">
+                <div class="relative z-10">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-sss-cyan/20 text-sss-cyan rounded-full mb-2 border border-sss-cyan/30">
+                        Member Services
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-bold">Online Member User ID Registration</h2>
+                    <p class="text-slate-300 text-sm mt-1">Please supply your official details exactly as registered with the Social Security System.</p>
+                </div>
+                <div class="absolute right-4 bottom-2 opacity-10 text-8xl pointer-events-none">
+                    <i class="fa-solid fa-id-card"></i>
+                </div>
+            </div>
+
+            
+            <div class="bg-amber-50 border-b border-amber-200 px-6 py-3.5 flex items-start space-x-3">
+                <i class="fa-solid fa-circle-info text-amber-600 mt-0.5 text-lg flex-shrink-0"></i>
+                <div class="text-xs sm:text-sm text-amber-900 leading-relaxed">
+                    <strong class="font-semibold">Important:</strong> Fields marked with an asterisk (<span class="text-red-500 font-bold">*</span>) are mandatory. Make sure your email provider allows emails from <code class="bg-amber-100 px-1 py-0.5 rounded text-amber-800">sss.gov.ph</code> to receive registration updates.
+                </div>
+            </div>
+
+            
+            <form id="sssRegistrationForm" class="p-6 sm:p-8 space-y-8" class="needs-validation" novalidate>
+                
+                
+                <div>
+                    <div class="flex items-center space-x-2 border-b border-slate-200 pb-3 mb-5">
+                        <span class="w-7 h-7 rounded-full bg-sss-blue text-white flex items-center justify-center font-bold text-sm">1</span>
+                        <h3 class="text-lg font-bold text-sss-navy">Account Identification</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div class="md:col-span-2">
+                            <label for="ssNumber" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                CRN / SS Number <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input type="text" id="ssNumber" name="ssNumber" placeholder="e.g. 34-1234567-8 or 0033-1234567-8" 
+                                    class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1 flex items-center justify-between">
+                                <span>10-digit SS Number or 12-digit Common Reference Number (CRN).</span>
+                                <span id="ssNumberError" class="text-red-500 font-medium hidden">Invalid SS/CRN format</span>
+                            </p>
+                        </div>
+
+                        
+                        <div>
+                            <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Email Address <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" placeholder="name@example.com" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            <p id="emailError" class="text-xs text-red-500 font-medium mt-1 hidden">Please enter a valid email address</p>
+                        </div>
+
+                        
+                        <div>
+                            <label for="confirmEmail" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Confirm Email Address <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" id="confirmEmail" name="confirmEmail" placeholder="Re-enter your email" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            <p id="confirmEmailError" class="text-xs text-red-500 font-medium mt-1 hidden">Emails do not match</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div>
+                    <div class="flex items-center space-x-2 border-b border-slate-200 pb-3 mb-5">
+                        <span class="w-7 h-7 rounded-full bg-sss-blue text-white flex items-center justify-center font-bold text-sm">2</span>
+                        <h3 class="text-lg font-bold text-sss-navy">Portal Credentials</h3>
+                    </div>
+
+                    
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-5 text-xs text-slate-600 space-y-1.5">
+                        <div class="font-semibold text-slate-800 flex items-center space-x-1.5 mb-1">
+                            <i class="fa-solid fa-shield-halved text-sss-blue"></i>
+                            <span>Preferred User ID Requirements:</span>
+                        </div>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pl-5 list-disc text-slate-600">
+                            <li id="ruleLength">8–20 characters long</li>
+                            <li id="ruleFirstAlpha">First character must be alphabetic</li>
+                            <li id="ruleNoSpecial">Only letters, numbers, and underscores (<code class="bg-slate-200 px-1 rounded">_</code>)</li>
+                            <li>Not allowed: <span class="font-mono text-red-600"># % ( ) \ — ' * || &lt; &gt; &quot; /</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div>
+                            <label for="userId" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Preferred User ID <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="userId" name="userId" placeholder="e.g. Juan_Cruz1234" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            <p id="userIdError" class="text-xs text-red-500 font-medium mt-1 hidden">Does not meet User ID requirements</p>
+                        </div>
+
+                        
+                        <div>
+                            <label for="confirmUserId" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Confirm Preferred User ID <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="confirmUserId" name="confirmUserId" placeholder="Re-enter preferred User ID" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            <p id="confirmUserIdError" class="text-xs text-red-500 font-medium mt-1 hidden">User IDs do not match</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div>
+                    <div class="flex items-center space-x-2 border-b border-slate-200 pb-3 mb-5">
+                        <span class="w-7 h-7 rounded-full bg-sss-blue text-white flex items-center justify-center font-bold text-sm">3</span>
+                        <h3 class="text-lg font-bold text-sss-navy">Personal Information</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <div>
+                            <label for="lastName" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Surname / Last Name <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="lastName" name="lastName" placeholder="e.g. Santos" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            <p id="lastNameError" class="text-xs text-red-500 font-medium mt-1 hidden">Last Name is required</p>
+                        </div>
+
+                        
+                        <div>
+                            <label for="firstName" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Given Name <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="firstName" name="firstName" placeholder="e.g. Maria Clara" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            <p id="firstNameError" class="text-xs text-red-500 font-medium mt-1 hidden">Given Name is required</p>
+                        </div>
+
+                        
+                        <div>
+                            <label for="middleName" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Middle Name <span class="text-slate-400 font-normal">(Optional)</span>
+                            </label>
+                            <input type="text" id="middleName" name="middleName" placeholder="e.g. Del Rosario" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none">
+                        </div>
+
+                        
+                        <div class="md:col-span-1">
+                            <label for="dob" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Date of Birth <span class="text-red-500">*</span>
+                            </label>
+                            <input type="date" id="dob" name="dob" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 text-sm focus:outline-none" required>
+                            <p id="dobError" class="text-xs text-red-500 font-medium mt-1 hidden">Please select a valid date</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div>
+                    <div class="flex items-center space-x-2 border-b border-slate-200 pb-3 mb-5">
+                        <span class="w-7 h-7 rounded-full bg-sss-blue text-white flex items-center justify-center font-bold text-sm">4</span>
+                        <h3 class="text-lg font-bold text-sss-navy">Mailing Address (Philippine Address)</h3>
+                    </div>
+
+                    
+                    <div class="mb-6 bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex items-center space-x-6">
+                        <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Region Category:</span>
+                        <div class="flex items-center space-x-4">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="radio" name="regionType" value="metro_manila" checked class="w-4 h-4 text-sss-blue focus:ring-sss-blue border-slate-300">
+                                <span class="ml-2 text-sm font-medium text-slate-800">Metro Manila</span>
+                            </label>
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="radio" name="regionType" value="province" class="w-4 h-4 text-sss-blue focus:ring-sss-blue border-slate-300">
+                                <span class="ml-2 text-sm font-medium text-slate-800">Province</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div>
+                            <label for="roomUnit" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Room / Floor / Unit No. & Building Name
+                            </label>
+                            <input type="text" id="roomUnit" name="roomUnit" placeholder="e.g. Unit 402, Sunshine Towers" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none">
+                        </div>
+
+                        
+                        <div>
+                            <label for="houseLot" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                House / Lot & Block No. <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="houseLot" name="houseLot" placeholder="e.g. Lot 12 Block 5" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            <p id="houseLotError" class="text-xs text-red-500 font-medium mt-1 hidden">House/Lot/Block detail is required</p>
+                        </div>
+
+                        
+                        <div>
+                            <label for="street" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Street <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="street" name="street" placeholder="e.g. Rizal Avenue" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            <p id="streetError" class="text-xs text-red-500 font-medium mt-1 hidden">Street is required</p>
+                        </div>
+
+                        
+                        <div>
+                            <label for="subdivision" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                                Subdivision / Barangay <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="subdivision" name="subdivision" placeholder="e.g. Brgy. San Lorenzo" 
+                                class="form-input w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none" required>
+                            <p id="subdivisionError" class="text-xs text-red-500 font-medium mt-1 hidden">Subdivision/Barangay is required</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="pt-2">
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="termsConsent" class="mt-1 w-4 h-4 text-sss-blue rounded border-slate-300 focus:ring-sss-blue" required>
+                        <span class="text-xs text-slate-600 leading-relaxed">
+                            I certify that all information provided above is true and accurate according to my records on file with the Social Security System. I accept the portal <a href="#" class="text-sss-blue hover:underline font-semibold">Terms of Service</a> and <a href="#" class="text-sss-blue hover:underline font-semibold">Privacy Policy</a>.
+                        </span>
+                    </label>
+                    <p id="termsError" class="text-xs text-red-500 font-medium mt-1 hidden">You must agree to the certification to proceed.</p>
+                </div>
+
+                
+                <div class="flex flex-col sm:flex-row items-center justify-end space-y-3 sm:space-y-0 sm:space-x-4 pt-4 border-t border-slate-200">
+                    <button type="button" id="resetBtn" 
+                        class="w-full sm:w-auto px-6 py-2.5 rounded-lg border border-slate-300 text-slate-700 font-medium text-sm hover:bg-slate-100 transition-colors duration-150 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-rotate-left text-slate-500"></i>
+                        <span>Reset Form</span>
+                    </button>
+                    <button type="submit" 
+                        class="w-full sm:w-auto px-8 py-2.5 rounded-lg bg-gradient-to-r from-sss-blue to-sss-navy text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-150 flex items-center justify-center space-x-2 hover:opacity-95">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Submit Registration</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    
+    <div id="successModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 custom-shadow text-center transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-600 text-2xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Registration Submitted!</h3>
+            <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+                Thank you for registering. An activation link has been dispatched to your email <strong id="modalEmail" class="text-slate-800"></strong>. Please check your inbox or spam folder to verify your account.
+            </p>
+            <button id="closeModalBtn" class="w-full py-2.5 px-4 bg-sss-blue hover:bg-sss-navy text-white font-medium text-sm rounded-lg transition-colors shadow">
+                Done & Return to Homepage
+            </button>
+        </div>
+    </div>
+
+    
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-12">
+        <div class="max-w-5xl mx-auto px-4 text-center space-y-2">
+            <p>Republic of the Philippines &copy; 2026 Social Security System. All Rights Reserved.</p>
+            <p class="text-slate-500">For security reasons, do not share your User ID or password with anyone.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
